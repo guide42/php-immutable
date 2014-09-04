@@ -1,0 +1,21 @@
+{
+    "name": "guide42/php-immutable",
+    "type": "library",
+    "description": "Immutable Objects",
+    "keywords": ["immutable"],
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Juan M Martínez",
+            "email": "immutable@jm.guide42.com",
+            "homepage": "http://jm.guide42.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
