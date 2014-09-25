@@ -30,15 +30,18 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->seq->contains(42));
     }
 
-    public function testReversed()
-    {
-        $this->assertInstanceOf('EmptyImmutableSequence', $this->seq->reversed());
-    }
-
     public function testIndex()
     {
         $this->setExpectedException('OutOfBoundsException');
         $this->seq->index('hello');
+    }
+
+    public function testReversed()
+    {
+        $new = $this->seq->reversed();
+
+        $this->assertInstanceOf('EmptyImmutableSequence', $new);
+        $this->assertNotSame($this->seq, $new);
     }
 
     public function testPrependAndAppend()

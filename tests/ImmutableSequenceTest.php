@@ -32,15 +32,6 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->seq->contains(3));
     }
 
-    public function testReversed()
-    {
-        $exp = new ImmutableSequence(array(3, 2, 1), 3);
-        $rev = $this->seq->reversed();
-
-        $this->assertInstanceOf('Sequence', $rev);
-        $this->assertEquals($exp, $rev);
-    }
-
     public function testIndex()
     {
         $this->assertEquals(0, $this->seq->index(1));
@@ -52,6 +43,15 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('OutOfBoundsException');
         $this->seq->index(42);
+    }
+
+    public function testReversed()
+    {
+        $exp = new ImmutableSequence(array(3, 2, 1), 3);
+        $rev = $this->seq->reversed();
+
+        $this->assertInstanceOf('Sequence', $rev);
+        $this->assertEquals($exp, $rev);
     }
 
     public function testPrepend()

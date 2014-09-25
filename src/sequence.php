@@ -8,7 +8,7 @@ interface Sequence extends ArrayAccess, Countable, IteratorAggregate,
      * @param unknown $x
      *
      * @return integer
-     * @throws OutOfRangeException
+     * @throws OutOfBoundsException
      */
     function index($x);
 
