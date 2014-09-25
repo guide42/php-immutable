@@ -30,9 +30,11 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->seq->contains(42));
     }
 
+    /**
+     * @expectedException OutOfBoundsException
+     */
     public function testIndex()
     {
-        $this->setExpectedException('OutOfBoundsException');
         $this->seq->index('hello');
     }
 
@@ -78,9 +80,11 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset($this->seq[42]));
     }
 
+    /**
+     * @expectedException OutOfRangeException
+     */
     public function testGet()
     {
-        $this->setExpectedException('OutOfRangeException');
         $this->seq[0];
     }
 }
