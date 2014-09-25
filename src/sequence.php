@@ -1,6 +1,7 @@
 <?php
 
-interface Sequence extends Countable, IteratorAggregate, Container {
+interface Sequence extends ArrayAccess, Countable, IteratorAggregate,
+                           Container {
     /**
      * Return a new reversed sequence.
      *
@@ -65,6 +66,22 @@ final class EmptyImmutableSequence implements Sequence {
     public function append($x) {
         return new ImmutableSequence(array($x), 1);
     }
+
+    public function offsetExists($offset) {
+        return false;
+    }
+
+    public function offsetGet($offset) {
+        throw new OutOfRangeException;
+    }
+
+    public function offsetSet($offset, $value) {
+        throw new BadMethodCallException;
+    }
+
+    public function offsetUnset($offset) {
+        throw new BadMethodCallException;
+    }
 }
 
 final class ImmutableSequence implements Sequence {
@@ -118,5 +135,25 @@ final class ImmutableSequence implements Sequence {
 
     public function append($x) {
         return new ImmutableSequence(array_merge($this->elements, array($x)), $this->count + 1);
+    }
+
+    public function offsetExists($offset) {
+        return array_key_exists($offset, $this->elements);
+    }
+
+    public function offsetGet($offset) {
+        if ($this->offsetExists($offset)) {
+            return $this->elements[$offset];
+        }
+
+        throw new OutOfRangeException;
+    }
+
+    public function offsetSet($offset, $value) {
+        throw new BadMethodCallException;
+    }
+
+    public function offsetUnset($offset) {
+        throw new BadMethodCallException;
     }
 }

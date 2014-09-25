@@ -61,4 +61,15 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($exp, $val);
     }
+
+    public function testExists()
+    {
+        $this->assertFalse(isset($this->seq[42]));
+    }
+
+    public function testGet()
+    {
+        $this->setExpectedException('OutOfRangeException');
+        $this->seq[0];
+    }
 }

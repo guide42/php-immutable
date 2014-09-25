@@ -69,4 +69,20 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($exp, $val);
     }
+
+    public function testExists()
+    {
+        $this->assertFalse(isset($this->seq[42]));
+
+        $this->assertTrue(isset($this->seq[0]));
+        $this->assertTrue(isset($this->seq[1]));
+        $this->assertTrue(isset($this->seq[2]));
+    }
+
+    public function testGet()
+    {
+        $this->assertEquals(1, $this->seq[0]);
+        $this->assertEquals(2, $this->seq[1]);
+        $this->assertEquals(3, $this->seq[2]);
+    }
 }
