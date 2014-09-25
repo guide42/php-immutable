@@ -6,7 +6,7 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->seq = new ImmutableSequence(array(1, 2, 3));
+        $this->seq = new ImmutableSequence(array(1, 2, 3), 3);
     }
 
     public function tearDown()
@@ -34,7 +34,7 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
     public function testReversed()
     {
-        $exp = new ImmutableSequence(array(3, 2, 1));
+        $exp = new ImmutableSequence(array(3, 2, 1), 3);
         $rev = $this->seq->reversed();
 
         $this->assertInstanceOf('Sequence', $rev);
@@ -56,11 +56,17 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
     public function testPrepend()
     {
-        $this->assertEquals(new ImmutableSequence(array(4, 1, 2, 3)), $this->seq->prepend(4));
+        $exp = new ImmutableSequence(array(4, 1, 2, 3), 4);
+        $val = $this->seq->prepend(4);
+
+        $this->assertEquals($exp, $val);
     }
 
     public function testAppend()
     {
-        $this->assertEquals(new ImmutableSequence(array(1, 2, 3, 4)), $this->seq->append(4));
+        $exp = new ImmutableSequence(array(1, 2, 3, 4), 4);
+        $val = $this->seq->append(4);
+
+        $this->assertEquals($exp, $val);
     }
 }

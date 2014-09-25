@@ -48,11 +48,17 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
     public function testPrepend()
     {
-        $this->assertEquals(new ImmutableSequence(array('1')), $this->seq->prepend('1'));
+        $exp = new ImmutableSequence(array('1'), 1);
+        $val = $this->seq->prepend('1');
+
+        $this->assertEquals($exp, $val);
     }
 
     public function testAppend()
     {
-        $this->assertEquals(new ImmutableSequence(array('1')), $this->seq->append('1'));
+        $exp = new ImmutableSequence(array('1'), 1);
+        $val = $this->seq->append('1');
+
+        $this->assertEquals($exp, $val);
     }
 }

@@ -59,11 +59,11 @@ final class EmptyImmutableSequence implements Sequence {
     }
 
     public function prepend($x) {
-        return new ImmutableSequence(array($x));
+        return new ImmutableSequence(array($x), 1);
     }
 
     public function append($x) {
-        return new ImmutableSequence(array($x));
+        return new ImmutableSequence(array($x), 1);
     }
 }
 
@@ -71,12 +71,9 @@ final class ImmutableSequence implements Sequence {
     private $elements = array();
     private $count = 0;
 
-    public function __construct($iterable) {
-        $sequence = $iterable ?: array();
-        foreach ($sequence as $value) {
-            $this->elements[] = $value;
-            $this->count++;
-        }
+    public function __construct($elements, $count) {
+        $this->elements = $elements;
+        $this->count = $count;
     }
 
     public function getIterator() {
@@ -116,10 +113,10 @@ final class ImmutableSequence implements Sequence {
     }
 
     public function prepend($x) {
-        return new ImmutableSequence(array_merge(array($x), $this->elements));
+        return new ImmutableSequence(array_merge(array($x), $this->elements), $this->count + 1);
     }
 
     public function append($x) {
-        return new ImmutableSequence(array_merge($this->elements, array($x)));
+        return new ImmutableSequence(array_merge($this->elements, array($x)), $this->count + 1);
     }
 }
