@@ -44,6 +44,14 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($this->seq, $new);
     }
 
+    public function testSliced()
+    {
+        $new = $this->seq->sliced(0);
+
+        $this->assertInstanceOf('EmptyImmutableSequence', $new);
+        $this->assertNotSame($this->seq, $new);
+    }
+
     public function testPrependAndAppend()
     {
         $this->assertEquals($this->seq->prepend('1'), $this->seq->append('1'));

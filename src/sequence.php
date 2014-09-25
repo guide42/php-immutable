@@ -20,6 +20,16 @@ interface Sequence extends ArrayAccess, Countable, IteratorAggregate,
     function reversed();
 
     /**
+     * Return a new sliced sequence.
+     *
+     * @param integer $start
+     * @param integer $stop
+     *
+     * @return Sequence
+     */
+    function sliced($start, $stop=null);
+
+    /**
      * Inserts $x at the start.
      *
      * @param unknown $x
@@ -56,6 +66,10 @@ final class EmptyImmutableSequence implements Sequence {
     }
 
     public function reversed() {
+        return new self;
+    }
+
+    public function sliced($start, $stop=null) {
         return new self;
     }
 
@@ -127,6 +141,31 @@ final class ImmutableSequence implements Sequence {
             $seq = $seq->prepend($value);
         }
         return $seq;
+    }
+
+    public function sliced($start, $stop=null) {
+        $count = $this->count;
+
+        if ($start < 0 && ($start = $count + $start) < 0) {
+            $start = 0;
+        }
+
+        if ($stop === null || $stop > $count) {
+            $stop = $count;
+        } elseif ($stop < 0 && ($stop = $count + $stop) < 0) {
+            $stop = 0;
+        }
+
+        $count = $stop - $start;
+
+        if ($count <= 0) {
+            return new EmptyImmutableSequence;
+        }
+
+        return new self(
+            array_slice($this->elements, $start, $count, false),
+            $count
+        );
     }
 
     public function prepend($x) {

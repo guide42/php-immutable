@@ -54,6 +54,54 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($exp, $rev);
     }
 
+    /**
+     * @dataProvider testSlicedProvider
+     */
+    public function testSliced($expected, $start, $stop)
+    {
+        $exp = new ImmutableSequence($expected, $c = count($expected));
+        $new = $this->seq->sliced($start, $stop);
+
+        $this->assertInstanceOf('Sequence', $new);
+        $this->assertEquals($exp, $new);
+        $this->assertCount($c, $new);
+    }
+
+    public function testSlicedProvider()
+    {
+        return array(
+            array(array(1, 2, 3), -4, null),
+            array(array(1, 2, 3), 0, null),
+            array(array(2, 3), 1, 3),
+            array(array(3), 2, 4),
+            array(array(2, 3), -2, null),
+            array(array(2), 1, -1),
+        );
+    }
+
+    /**
+     * @dataProvider testSlicedEmptyProvider
+     */
+    public function testSlicedEmpty($start, $stop)
+    {
+        $exp = new EmptyImmutableSequence;
+        $new = $this->seq->sliced($start, $stop);
+
+        $this->assertEquals($exp, $new);
+        $this->assertCount(0, $new);
+    }
+
+    public function testSlicedEmptyProvider()
+    {
+        return array(
+            array(3, null),
+            array(-1, -2),
+            array(2, -4),
+            array(1, -3),
+            array(2, 2),
+        );
+    }
+
     public function testPrepend()
     {
         $exp = new ImmutableSequence(array(4, 1, 2, 3), 4);
