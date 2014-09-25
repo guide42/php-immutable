@@ -3,13 +3,6 @@
 interface Sequence extends ArrayAccess, Countable, IteratorAggregate,
                            Container {
     /**
-     * Return a new reversed sequence.
-     *
-     * @return Sequence
-     */
-    function reversed();
-
-    /**
      * Return $x's index or throw an exception.
      *
      * @param unknown $x
@@ -18,6 +11,13 @@ interface Sequence extends ArrayAccess, Countable, IteratorAggregate,
      * @throws OutOfRangeException
      */
     function index($x);
+
+    /**
+     * Return a new reversed sequence.
+     *
+     * @return Sequence
+     */
+    function reversed();
 
     /**
      * Inserts $x at the start.
@@ -51,12 +51,12 @@ final class EmptyImmutableSequence implements Sequence {
         return false;
     }
 
-    public function reversed() {
-        return new self;
-    }
-
     public function index($x) {
         throw new OutOfBoundsException;
+    }
+
+    public function reversed() {
+        return new self;
     }
 
     public function prepend($x) {
@@ -112,14 +112,6 @@ final class ImmutableSequence implements Sequence {
         return true;
     }
 
-    public function reversed() {
-        $seq = new EmptyImmutableSequence;
-        foreach ($this->getIterator() as $value) {
-            $seq = $seq->prepend($value);
-        }
-        return $seq;
-    }
-
     public function index($x) {
         foreach ($this->getIterator() as $index => $value) {
             if ($value === $x) {
@@ -127,6 +119,14 @@ final class ImmutableSequence implements Sequence {
             }
         }
         throw new OutOfBoundsException;
+    }
+
+    public function reversed() {
+        $seq = new EmptyImmutableSequence;
+        foreach ($this->getIterator() as $value) {
+            $seq = $seq->prepend($value);
+        }
+        return $seq;
     }
 
     public function prepend($x) {
