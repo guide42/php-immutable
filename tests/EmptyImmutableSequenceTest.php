@@ -37,7 +37,7 @@ class EmptyImmutableSequenceTest extends PHPUnit_Framework_TestCase
 
     public function testIndex()
     {
-        $this->setExpectedException('OutOfRangeException');
+        $this->setExpectedException('OutOfBoundsException');
         $this->seq->index('hello');
     }
 

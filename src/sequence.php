@@ -55,7 +55,7 @@ final class EmptyImmutableSequence implements Sequence {
     }
 
     public function index($x) {
-        throw new OutOfRangeException;
+        throw new OutOfBoundsException;
     }
 
     public function prepend($x) {
@@ -89,7 +89,7 @@ final class ImmutableSequence implements Sequence {
     public function contains($x) {
         try {
             $this->index($x);
-        } catch (OutOfRangeException $e) {
+        } catch (OutOfBoundsException $e) {
             return false;
         }
         return true;
@@ -109,7 +109,7 @@ final class ImmutableSequence implements Sequence {
                 return $index;
             }
         }
-        throw new OutOfRangeException;
+        throw new OutOfBoundsException;
     }
 
     public function prepend($x) {

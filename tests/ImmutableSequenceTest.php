@@ -48,9 +48,9 @@ class ImmutableSequenceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $this->seq->index(3));
     }
 
-    public function testIndexOutOfRange()
+    public function testIndexOutOfBounds()
     {
-        $this->setExpectedException('OutOfRangeException');
+        $this->setExpectedException('OutOfBoundsException');
         $this->seq->index(42);
     }
 
