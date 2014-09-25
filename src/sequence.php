@@ -169,14 +169,14 @@ final class ImmutableSequence implements Sequence {
     }
 
     public function prepend($x) {
-        return new ImmutableSequence(
+        return new self(
             array_merge(array($x), $this->elements),
             $this->count + 1
         );
     }
 
     public function append($x) {
-        return new ImmutableSequence(
+        return new self(
             array_merge($this->elements, array($x)),
             $this->count + 1
         );
@@ -190,7 +190,6 @@ final class ImmutableSequence implements Sequence {
         if ($this->offsetExists($offset)) {
             return $this->elements[$offset];
         }
-
         throw new OutOfRangeException;
     }
 
