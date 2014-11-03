@@ -1,0 +1,22 @@
+List of collected links.
+
+## PHP Projects
+
+* https://github.com/keyvanakbary/medusa
+* https://github.com/aramirez-es/immutable-data-structures
+* https://github.com/JosephMoniz/php-sorted-set
+* https://github.com/JosephMoniz/php-map
+* https://github.com/schmittjoh/php-collection
+* https://github.com/morrisonlevi/Ardent
+* https://github.com/merk/Dough
+* https://github.com/garoevans/php-enum
+* https://github.com/psliwa/fluent-traversable
+
+## Resources
+
+* http://hypirion.com/musings/understanding-persistent-vector-pt-1
+* https://wiki.python.org/moin/HowTo/Sorting/
+* https://docs.python.org/3.5/library/stdtypes.html#typesseq
+* https://github.com/php/php-src/blob/a770d29df74515197c76efdf1a64d9794c27b4af/ext/standard/array.c#L2223
+* https://github.com/facebook/immutable-js
+
